@@ -12,6 +12,7 @@ export default function Products(props) {
             <table className='w-full'>
 
                 {/*TABLE HEADER*/}
+                <thead>
                 <tr className='text-left border-slate-400 border-b-2 [&>th]:uppercase'>
                     <th>Identification</th>
                     <th>Price</th>
@@ -19,8 +20,10 @@ export default function Products(props) {
                     <th className='hidden sm:table-cell'>Stock</th>
                     <th></th>
                 </tr>
+                </thead>
 
                 {/*TABLE ITEMS*/}
+                <tbody>
                 {items.map((item) => (
                 <tr key={item.id} className='[&>td]:bg-slate-100 h-full'>
                     {/* IDENTIFICATION */}
@@ -30,6 +33,7 @@ export default function Products(props) {
                             width={100}
                             height={50}
                             className='hidden sm:block'
+                            alt={item.name}
                         />
                         <div className=''>
                             <p>{item.name}</p>
@@ -55,6 +59,7 @@ export default function Products(props) {
                     </td>
                 </tr>
                 ))}
+                </tbody>
             </table>
         </section>
     )

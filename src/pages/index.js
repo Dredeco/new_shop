@@ -12,9 +12,9 @@ export default function Home() {
 
   useEffect(() => {
       makeServer()
-      fetch("/api/products")
-          .then((response) => response.json())
-          .then((json) => setProducts(json))
+      fetch("api/products")
+      .then((response) => response.json())
+      .then((json) => setProducts(json))
       }, [])
 
   return (
