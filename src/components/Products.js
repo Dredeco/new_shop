@@ -2,9 +2,17 @@ import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
 import HeartIcon from './icons/HeartIcon'
 import HeartIconSolid from './icons/HeartIconSolid'
+import Link from 'next/link'
 
 export default function Products(props) {
     const { items } = props
+    const { products } = items
+    let [favorite, setFavorite] = useState(true)
+
+    const onClickFavorite = (id) => {
+        let newId = id - 1
+
+    }
 
     return (
         <section className='px-[2%] bg-white'>
@@ -24,38 +32,40 @@ export default function Products(props) {
 
                 {/*TABLE ITEMS*/}
                 <tbody>
-                {items.map((item) => (
-                <tr key={item.id} className='[&>td]:bg-slate-100 h-full'>
+                {products?.map((product) => (
+                <tr key={product.id} className='[&>td]:bg-slate-100 h-full'>
                     {/* IDENTIFICATION */}
                     <td className='flex gap-1 items-center'>
                         <Image
-                            src={item.image}
+                            src={product.image}
                             width={100}
                             height={50}
                             className='hidden sm:block'
-                            alt={item.name}
+                            alt={product.name}
                         />
                         <div className=''>
-                            <p>{item.name}</p>
-                            <p>{item.code}</p>
+                            <p>{product.name}</p>
+                            <p>{product.code}</p>
                         </div>
                     </td>
                     {/* PRICE */}
                     <td className=''>
-                        R$ {Number(item.price).toFixed(2)}
+                        R$ {Number(product.price).toFixed(2)}
                     </td>
                     {/* SALES */}
                     <td className='hidden sm:table-cell'>
-                        <strong>Total de {item.sales * item.price}</strong>
-                        <p>{item.sales} vendas</p>
+                        <strong>Total de {product.sales * product.price}</strong>
+                        <p>{product.sales} vendas</p>
                     </td>
                     {/* STOCK */}
                     <td className='hidden sm:table-cell'>
-                        {item.stock} und
+                        {product.stock} und
                     </td>
                     {/* FAVORITE */}
                     <td>
-                        {item.favorite ? <HeartIconSolid /> : <HeartIcon />}
+                        <a onClick={() => onClickFavorite(id, favorite)}>
+                            {product.favorite ? <HeartIconSolid /> : <HeartIcon />}
+                        </a>
                     </td>
                 </tr>
                 ))}
