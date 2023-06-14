@@ -1,3 +1,4 @@
+import { getProducts } from '@/api/actions'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
@@ -9,11 +10,10 @@ export default function Header( {setResults} ) {
         fetchData(value)
     }
 
-    const fetchData = (value) => {
-      fetch("api/products")
-      .then((response) => response.json())
-      .then((json) => {
-        const results = json.filter((product) => {
+    const fetchData = async (value) => {
+      let data = await getProducts()
+      let {products} = data
+        const results = products.filter((product) => {
           return (
             value &&
             product &&
@@ -22,8 +22,7 @@ export default function Header( {setResults} ) {
           )
         })
         setResults(results)
-      })
-    }
+      }
 
   return (
     <header className='flex justify-around p-4 bg-blue-600'>

@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Products from '@/components/Products'
 import { useEffect, useState } from 'react'
 import { makeServer } from '@/api/server'
+import { getProducts } from '@/api/actions'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,16 +13,20 @@ export default function Home() {
 
   useEffect(() => {
       makeServer()
-      fetch("api/products")
-      .then((response) => response.json())
-      .then((json) => setProducts(json))
+      const fetchData = async () => {
+        let data = await getProducts()
+        let prod = data.products
+        setProducts(prod)
+      }
+      fetchData()
+      console.log(products)
       }, [])
 
   return (
     <>
     <main className={`${inter.className}`}>
       <Header setResults={setResults}/>
-      <Products items={results == "" ? products : results} />
+      <Products items={results == '' ? products : results} />
     </main>
     </>
   )

@@ -6,7 +6,6 @@ import Link from 'next/link'
 
 export default function Products(props) {
     const { items } = props
-    const { products } = items
     let [favorite, setFavorite] = useState(true)
 
     const onClickFavorite = (id) => {
@@ -32,7 +31,7 @@ export default function Products(props) {
 
                 {/*TABLE ITEMS*/}
                 <tbody>
-                {products?.map((product) => (
+                {items?.map((product) => (
                 <tr key={product.id} className='[&>td]:bg-slate-100 h-full'>
                     {/* IDENTIFICATION */}
                     <td className='flex gap-1 items-center'>
