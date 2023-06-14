@@ -6,8 +6,8 @@ export default function Header( {setResults} ) {
   const [input, setInput] = useState("")
 
     function handleChange(value) {
-        setInput(value)
-        fetchData(value)
+        setInput(value.toLowerCase())
+        fetchData(value.toLowerCase())
     }
 
     const fetchData = async (value) => {
