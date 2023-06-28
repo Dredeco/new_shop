@@ -4,15 +4,36 @@ import { Heart } from './icons/Heart'
 import { FullHeart } from './icons/FullHeart'
 import { ArrowLeft } from './icons/ArrowLeft'
 import { ArrowRight } from './icons/ArrowRight'
+import { paginate } from '@/services/Pagination'
 
 export default function Products(props) {
+    const [favorite, setFavorite] = useState(true)
+    const [currentPage, setCurrentPage] = useState(1);
+
     const { items } = props
-    let [favorite, setFavorite] = useState(true)
+    const pageSize = 5;
+    const paginatedPosts = paginate(items, currentPage, pageSize);
+    const pagesCount = Math.ceil(items.length / pageSize); // 100/10
 
     const onClickFavorite = (id) => {
         let newId = id - 1
-
     }
+
+    const onClickNext = () => {
+      if (currentPage >= pagesCount ) {
+         setCurrentPage(pagesCount)
+       } else {
+         setCurrentPage(currentPage + 1)
+       }
+     }
+
+     const onClickFoward = () => {
+       if (currentPage <= 1 ) {
+          setCurrentPage(1)
+        } else {
+          setCurrentPage(currentPage - 1)
+        }
+      }
 
     return (
         <section className='px-[2%] max-w-[883px] bg-white flex-1 pt-12'>
@@ -21,11 +42,11 @@ export default function Products(props) {
             <h1>Todos os produtos</h1>
 
             <div className='flex gap-4'>
-                <button>
+                <button onClick={onClickFoward}>
                     <ArrowLeft />
                 </button>
 
-                <button>
+                <button onClick={onClickNext}>
                     <ArrowRight />
                 </button>
             </div>
@@ -48,7 +69,7 @@ export default function Products(props) {
 
             {/*TABLE ITEMS*/}
             <tbody>
-            {items?.map((product) => (
+            {paginatedPosts?.map((product) => (
             <tr key={product.id} className='h-full [&>td]:border-b'>
                 {/* IDENTIFICATION */}
                 <td className='flex gap-1 items-center py-8'>
@@ -87,7 +108,10 @@ export default function Products(props) {
             ))}
             </tbody>
             </table>
+
+            <p className='flex right-0'>Página {currentPage} de {pagesCount}</p>
             </div>
+
         </section>
     )
 }
