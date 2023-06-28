@@ -26,7 +26,7 @@ export default function Header( {setResults} ) {
 
   return (
     <header className='flex justify-around p-4 bg-blue-600'>
-      <Link href='#'>
+      <Link href='/'>
         <p className='text-white'>Logomarca</p>
       </Link>
         <input 

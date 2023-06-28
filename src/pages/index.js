@@ -4,6 +4,7 @@ import Products from '@/components/Products'
 import { useEffect, useState } from 'react'
 import { makeServer } from '@/api/server'
 import { getProducts } from '@/api/actions'
+import BestSellers from '@/components/BestSellers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +27,10 @@ export default function Home() {
     <>
     <main className={`${inter.className}`}>
       <Header setResults={setResults}/>
+      <div className='flex justify-between'>
+      <BestSellers />
       <Products items={results == '' ? products : results} />
+      </div>
     </main>
     </>
   )

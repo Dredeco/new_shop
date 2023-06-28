@@ -1,4 +1,5 @@
 import { createServer, Model } from 'miragejs'
+import Photo from '../../public/photo.svg'
 
 export function makeServer() {
   createServer({
@@ -34,7 +35,7 @@ export function makeServer() {
     seeds(server) {
       server.create("product", {               
         id: 1,
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         name: "Maça",
         code: "MLB123456",
         sales: 30,
@@ -45,7 +46,7 @@ export function makeServer() {
       server.create("product", {               
         id: 2,
         name: "Pera",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 50,
         price: 3,
@@ -55,7 +56,7 @@ export function makeServer() {
       server.create("product", {               
         id: 3,
         name: "Uva",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 60,
         price: 1,
@@ -65,7 +66,7 @@ export function makeServer() {
       server.create("product", {               
         id: 4,
         name: "Banana",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 30,
         price: 1,
@@ -75,7 +76,7 @@ export function makeServer() {
       server.create("product", {               
         id: 5,
         name: "Kiwi",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 15,
         price: 2,
@@ -85,7 +86,7 @@ export function makeServer() {
       server.create("product", {               
         id: 6,
         name: "Pessego",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 10,
         price: 5,
@@ -95,7 +96,7 @@ export function makeServer() {
       server.create("product", {               
         id: 7,
         name: "Morango",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 30,
         price: 2,
@@ -105,7 +106,7 @@ export function makeServer() {
       server.create("product", {               
         id: 8,
         name: "Goiaba",
-        image: "https://ibassets.com.br/ib.item.image.big/b-7f796a9ef182423f9b8da1b7672d652e.jpeg",
+        image: Photo,
         code: "MLB123456",
         sales: 20,
         price: 2,

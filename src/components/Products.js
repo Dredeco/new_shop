@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
-import HeartIcon from './icons/HeartIcon'
-import HeartIconSolid from './icons/HeartIconSolid'
-import Link from 'next/link'
+import { Heart } from './icons/Heart'
+import { FullHeart } from './icons/FullHeart'
+import { ArrowLeft } from './icons/ArrowLeft'
+import { ArrowRight } from './icons/ArrowRight'
 
 export default function Products(props) {
     const { items } = props
@@ -14,62 +15,79 @@ export default function Products(props) {
     }
 
     return (
-        <section className='px-[2%] bg-white'>
+        <section className='px-[2%] max-w-[883px] bg-white flex-1 pt-12'>
             {/*PRODUCTS TABLE*/}
+            <div className='flex justify-between'>
+            <h1>Todos os produtos</h1>
+
+            <div className='flex gap-4'>
+                <button>
+                    <ArrowLeft />
+                </button>
+
+                <button>
+                    <ArrowRight />
+                </button>
+            </div>
+
+            </div>
+
+            <div className='p-12 bg-[#F3F5F9] text-[#99A0B0] rounded-2xl my-12'>
             <table className='w-full'>
 
-                {/*TABLE HEADER*/}
-                <thead>
-                <tr className='text-left border-slate-400 border-b-2 [&>th]:uppercase'>
-                    <th>Identification</th>
-                    <th>Price</th>
-                    <th className='hidden sm:table-cell'>Sales</th>
-                    <th className='hidden sm:table-cell'>Stock</th>
-                    <th></th>
-                </tr>
-                </thead>
+            {/*TABLE HEADER*/}
+            <thead className=''>
+            <tr className='text-left border-black border-opacity-10 border-b-2 [&>th]:uppercase [&>th]:flex-row [&>th]:pb-7'>
+                <th>Identification</th>
+                <th>Price</th>
+                <th className='hidden sm:table-cell'>Sales</th>
+                <th className='hidden sm:table-cell'>Stock</th>
+                <th></th>
+            </tr>
+            </thead>
 
-                {/*TABLE ITEMS*/}
-                <tbody>
-                {items?.map((product) => (
-                <tr key={product.id} className='[&>td]:bg-slate-100 h-full'>
-                    {/* IDENTIFICATION */}
-                    <td className='flex gap-1 items-center'>
-                        <Image
-                            src={product.image}
-                            width={100}
-                            height={50}
-                            className='hidden sm:block'
-                            alt={product.name}
-                        />
-                        <div className=''>
-                            <p>{product.name}</p>
-                            <p>{product.code}</p>
-                        </div>
-                    </td>
-                    {/* PRICE */}
-                    <td className=''>
-                        R$ {Number(product.price).toFixed(2)}
-                    </td>
-                    {/* SALES */}
-                    <td className='hidden sm:table-cell'>
-                        <strong>Total de {product.sales * product.price}</strong>
-                        <p>{product.sales} vendas</p>
-                    </td>
-                    {/* STOCK */}
-                    <td className='hidden sm:table-cell'>
-                        {product.stock} und
-                    </td>
-                    {/* FAVORITE */}
-                    <td>
-                        <a onClick={() => onClickFavorite(id, favorite)}>
-                            {product.favorite ? <HeartIconSolid /> : <HeartIcon />}
-                        </a>
-                    </td>
-                </tr>
-                ))}
-                </tbody>
+            {/*TABLE ITEMS*/}
+            <tbody>
+            {items?.map((product) => (
+            <tr key={product.id} className='h-full [&>td]:border-b'>
+                {/* IDENTIFICATION */}
+                <td className='flex gap-1 items-center py-8'>
+                    <Image
+                        src={product.image}
+                        width={85}
+                        height={85}
+                        className='hidden sm:block'
+                        alt={product.name}
+                    />
+                    <div className='flex flex-col ml-12'>
+                        <strong className='text-[#235EE7]'>{product.name}</strong>
+                        <strong className='text-[#6B7183]'>#{product.code}</strong>
+                    </div>
+                </td>
+                {/* PRICE */}
+                <td className=''>
+                    R$ {Number(product.price).toFixed(2)}
+                </td>
+                {/* SALES */}
+                <td className='hidden sm:table-cell'>
+                    <strong>Total de {product.sales * product.price}</strong>
+                    <p>{product.sales} vendas</p>
+                </td>
+                {/* STOCK */}
+                <td className='hidden sm:table-cell'>
+                    {product.stock} und
+                </td>
+                {/* FAVORITE */}
+                <td>
+                    <button onClick={() => onClickFavorite(id, favorite)}>
+                        {product.favorite ? <FullHeart /> : <Heart />}
+                    </button>
+                </td>
+            </tr>
+            ))}
+            </tbody>
             </table>
+            </div>
         </section>
     )
 }
