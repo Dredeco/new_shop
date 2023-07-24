@@ -10,8 +10,8 @@ export async function getProducts(name, budget, category){
     return response;
 }
 
-export async function setProduct(product){
-    const response = await fetch('/api/products', {
+export async function setProduct(id){
+    const response = await fetch(`/api/products/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
