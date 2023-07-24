@@ -28,7 +28,6 @@ export default function Home() {
     <main className={`${inter.className}`}>
       <Header setResults={setResults}/>
       <div className='flex justify-between'>
-      <BestSellers />
       <Products items={results == '' ? products : results} />
       </div>
     </main>

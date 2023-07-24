@@ -5,6 +5,7 @@ import { FullHeart } from './icons/FullHeart'
 import { ArrowLeft } from './icons/ArrowLeft'
 import { ArrowRight } from './icons/ArrowRight'
 import { paginate } from '@/services/Pagination'
+import { setProduct } from '@/api/actions'
 
 export default function Products(props) {
     const [favorite, setFavorite] = useState(true)
@@ -15,8 +16,9 @@ export default function Products(props) {
     const paginatedPosts = paginate(items, currentPage, pageSize);
     const pagesCount = Math.ceil(items.length / pageSize); // 100/10
 
-    const onClickFavorite = (id) => {
-        let newId = id - 1
+    const onClickFavorite = (id, favorite) => {
+        const prod = items.find((p) => p.id === id)
+        console.log(prod)
     }
 
     const onClickNext = () => {
@@ -71,6 +73,7 @@ export default function Products(props) {
             <tbody>
             {paginatedPosts?.map((product) => (
             <tr key={product.id} className='h-full [&>td]:border-b'>
+                
                 {/* IDENTIFICATION */}
                 <td className='flex gap-1 items-center py-8'>
                     <Image
@@ -85,22 +88,26 @@ export default function Products(props) {
                         <strong className='text-[#6B7183]'>#{product.code}</strong>
                     </div>
                 </td>
+
                 {/* PRICE */}
                 <td className=''>
                     R$ {Number(product.price).toFixed(2)}
                 </td>
+
                 {/* SALES */}
                 <td className='hidden sm:table-cell'>
                     <strong>Total de {product.sales * product.price}</strong>
                     <p>{product.sales} vendas</p>
                 </td>
+
                 {/* STOCK */}
                 <td className='hidden sm:table-cell'>
                     {product.stock} und
                 </td>
+
                 {/* FAVORITE */}
                 <td>
-                    <button onClick={() => onClickFavorite(id, favorite)}>
+                    <button onClick={() => onClickFavorite(product.id, product.favorite)}>
                         {product.favorite ? <FullHeart /> : <Heart />}
                     </button>
                 </td>

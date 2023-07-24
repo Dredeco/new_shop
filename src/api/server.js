@@ -25,9 +25,9 @@ export function makeServer() {
         return schema.products.create(attrs)
       })
 
-      this.patch ("/products", (schema, request) => {
+      this.patch ("/products/:id", (schema, request) => {
+        let id = request.params.id
         let attrs = JSON.parse(request.requestBody)
-        let id = Number(attrs.id)
         return (schema.products.find(id).update(attrs))
       })
     },
