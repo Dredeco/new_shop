@@ -5,19 +5,34 @@ import { FullHeart } from './icons/FullHeart'
 import { ArrowLeft } from './icons/ArrowLeft'
 import { ArrowRight } from './icons/ArrowRight'
 import { paginate } from '@/services/Pagination'
-import { setProduct } from '@/api/actions'
+import { getProducts, setProduct } from '@/api/actions'
+import { makeServer } from '@/api/server'
 
 export default function Products(props) {
+    const { items } = props
+
     const [favorite, setFavorite] = useState(true)
     const [currentPage, setCurrentPage] = useState(1);
+    const [products, setProducts] = useState(items)
 
-    const { items } = props
     const pageSize = 5;
     const paginatedPosts = paginate(items, currentPage, pageSize);
     const pagesCount = Math.ceil(items.length / pageSize); // 100/10
-
-    const onClickFavorite = (id, favorite) => {
+    
+    
+    const onClickFavorite = async (id, favorite) => {
         const prod = items.find((p) => p.id === id)
+        prod.favorite = !favorite
+
+        setProduct(id, prod)
+        
+        const fetchData = async () => {
+            let data = await getProducts()
+            let prod = data.products
+            setProducts(prod)
+        }
+        fetchData()
+        
         console.log(prod)
     }
 
@@ -29,7 +44,7 @@ export default function Products(props) {
        }
      }
 
-     const onClickFoward = () => {
+     const onClickForward = () => {
        if (currentPage <= 1 ) {
           setCurrentPage(1)
         } else {
@@ -44,7 +59,7 @@ export default function Products(props) {
             <h1>Todos os produtos</h1>
 
             <div className='flex gap-4'>
-                <button onClick={onClickFoward}>
+                <button onClick={onClickForward}>
                     <ArrowLeft />
                 </button>
 
