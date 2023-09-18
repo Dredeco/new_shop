@@ -1,32 +1,23 @@
 import { getProducts } from '@/api/actions'
+import { AppContext } from '@/context/Context'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-export default function Header( {setResults} ) {
-  const [input, setInput] = useState("")
+export default function Header() {
+
+  let { filterText, setFilterText, filterFavorite, setFilterFavorite } = useContext(AppContext)
 
     function handleChange(value) {
-        setInput(value.toLowerCase())
-        fetchData(value.toLowerCase())
+      setFilterText(value)
     }
 
-    const fetchData = async (value) => {
-      let data = await getProducts()
-      let {products} = data
-        const results = products.filter((product) => {
-          return (
-            value &&
-            product &&
-            product.name &&
-            product.name.toLowerCase().includes(value)
-          )
-        })
-        setResults(results)
-      }
+    const handleFavorite = () => {
+      return setFilterFavorite(!filterFavorite)
+    }
 
   return (
     <header className='flex justify-around p-4 bg-blue-600'>
-      <Link href='/'>
+      <Link href='#'>
         <p className='text-white'>Logomarca</p>
       </Link>
         <input 
@@ -35,6 +26,7 @@ export default function Header( {setResults} ) {
           className='border-2'
           onChange={(e) => handleChange(e.target.value)}
         />
+        <button onClick={handleFavorite}>Favoritos</button>
     </header>
   )
 }

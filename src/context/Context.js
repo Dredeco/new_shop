@@ -1,5 +1,14 @@
-const { createContext } = require("react");
+const { createContext, useState } = require("react");
 
-const Context = createContext(0);
+export const AppContext = createContext(0);
 
-export default Context
+export const AppContextProvider = ({ children }) => {
+    const [filterText, setFilterText] = useState('')
+    const [filterFavorite, setFilterFavorite] = useState(false)
+    
+    return (
+        <AppContext.Provider value={{ filterText, setFilterText, filterFavorite, setFilterFavorite }}>
+            {children}
+        </AppContext.Provider>
+    )
+}

@@ -6,7 +6,6 @@ import { ArrowLeft } from './icons/ArrowLeft'
 import { ArrowRight } from './icons/ArrowRight'
 import { paginate } from '@/services/Pagination'
 import { getProducts, setProduct } from '@/api/actions'
-import { makeServer } from '@/api/server'
 
 export default function Products(props) {
     const { items } = props
@@ -42,15 +41,15 @@ export default function Products(props) {
        } else {
          setCurrentPage(currentPage + 1)
        }
-     }
+    }
 
-     const onClickForward = () => {
-       if (currentPage <= 1 ) {
-          setCurrentPage(1)
-        } else {
-          setCurrentPage(currentPage - 1)
-        }
-      }
+    const onClickForward = () => {
+    if (currentPage <= 1 ) {
+        setCurrentPage(1)
+    } else {
+        setCurrentPage(currentPage - 1)
+    }
+    }
 
     return (
         <section className='px-[2%] max-w-[883px] bg-white flex-1 pt-12'>
